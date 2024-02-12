@@ -12,7 +12,7 @@
 
   <!-- TODO #1 - Use a loop to display job results in a table. -->
 <!--loop through jobs array list-->
-  <table tr th:each="job : ${jobs}" class="job-listing">
+  <table th:frament="job-results" tr th:each="job : ${jobs}" class="job-listing">
 <!--use dot notation to place each field per row-->
     <tr>
         <td>ID:</td>
