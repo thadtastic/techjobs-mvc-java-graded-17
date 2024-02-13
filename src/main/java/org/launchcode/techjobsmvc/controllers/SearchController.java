@@ -32,21 +32,24 @@ public class SearchController {
     // TODO #3 - Create a handler to process a search request and render the updated search view.
 //    how do I requestparam for a radio button??? used the form field names
     @PostMapping("results")
-    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
-        ArrayList<Job> jobs = null;
-        if(searchTerm.equals("all") || searchTerm.isEmpty()){
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+        ArrayList<Job> jobs;
+        if (searchTerm.equals("all") || searchTerm.isEmpty()) {
             //call the findAll() method from JobData, store the results in jobs ArrayList.
             jobs = JobData.findAll();
-        }else{
+           // return "search";
+        } else {
             //Otherwise, send the search information to findByColumnAndValue, store the results in jobs ArrayList.
-            model.addAttribute("jobs", jobs);
-            //copied from search method.
-            model.addAttribute("columns", columnChoices);
-
-
+            jobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
+        model.addAttribute("jobs", jobs);
+        //copied from search method.
+        model.addAttribute("columns", columnChoices);
+
         return "search";
     }
 
 }
+
+
 
